@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Edit {{ servant['name'] }}{% endblock %}
+
+{% block content %}
+<h2>Edit Servant: {{ servant['name'] }}</h2>
+
+<form method="POST" class="servant-form" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="name">Servant Name:</label>
+        <input type="text" id="name" name="name" value="{{ servant['name'] }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="class">Class:</label>
+        <select id="class" name="class" required>
+            {% for class in ['Saber', 'Archer', 'Lancer', 'Rider', 'Caster', 'Assassin', 'Berserker', 'Ruler', 'Avenger', 'Alter Ego', 'Moon Cancer', 'Foreigner', 'Pretender', 'Beast'] %}
+            <option value="{{ class }}" {% if servant['class'] == class %}selected{% endif %}>{{ class }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="rarity">Rarity (1-5):</label>
+        <input type="number" id="rarity" name="rarity" min="1" max="5" value="{{ servant['rarity'] }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="attack">Attack:</label>
+        <input type="number" id="attack" name="attack" value="{{ servant['attack'] }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="hp">HP:</label>
+        <input type="number" id="hp" name="hp" value="{{ servant['hp'] }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="np_name">Noble Phantasm Name:</label>
+        <input type="text" id="np_name" name="np_name" value="{{ servant['np_name'] }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="np_effect">Noble Phantasm Effect:</label>
+        <textarea id="np_effect" name="np_effect" rows="4" required>{{ servant['np_effect'] }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="image">Servant Image:</label>
+        {% if servant['image_url'] %}
+        <div class="current-image">
+            <img src="{{ servant['image_url'] }}" alt="Current Image" style="max-width: 200px; display: block; margin-bottom: 10px;">
+            <small>Current Image</small>
+        </div>
+        {% endif %}
+        <input type="file" id="image" name="image" accept="image/*">
+        <small class="form-text">Max 2MB (JPEG, PNG, GIF). Leave empty to keep current image.</small>
+    </div>
+
+    <button type="submit" class="button">Update Servant</button>
+    <a href="{{ url_for('servant_detail', id=servant['id']) }}" class="button secondary">Cancel</a>
+</form>
+{% endblock %}

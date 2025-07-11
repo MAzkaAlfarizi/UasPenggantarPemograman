@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h2>Welcome to Fate/Grand Order Servant Database</h2>
+    <p>Manage and view information about all your favorite servants from Fate/Grand Order.</p>
+    <div class="cta-buttons">
+        <a href="{{ url_for('servants') }}" class="button">View Servants</a>
+        <a href="{{ url_for('add_servant') }}" class="button">Add New Servant</a>
+    </div>
+</section>
+
+<!-- New Statistics Section -->
+<section class="statistics">
+    <h2>Servant Statistics</h2>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Servants by Class</h3>
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Count</th>
+                        <th>Avg Rarity</th>
+                        <th>Avg ATK</th>
+                        <th>Avg HP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in class_stats %}
+                    <tr>
+                        <td>{{ stat['class'] }}</td>
+                        <td>{{ stat['count'] }}</td>
+                        <td>{{ "%.1f"|format(stat['avg_rarity']) }}★</td>
+                        <td>{{ "%.0f"|format(stat['avg_attack']) }}</td>
+                        <td>{{ "%.0f"|format(stat['avg_hp']) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="stat-card">
+            <h3>Top 3 Highest Attack</h3>
+            <ul class="top-list">
+                {% for servant in top_attack %}
+                <li>
+                    <span class="servant-name">{{ servant['name'] }}</span>
+                    <span class="servant-class">{{ servant['class'] }}</span>
+                    <span class="servant-stat">{{ servant['attack'] }} ATK</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature">
+        <h3>Servant Classes</h3>
+        <p>View servants by their class: Saber, Archer, Lancer, Rider, Caster, Assassin, Berserker, and more.</p>
+    </div>
+    <div class="feature">
+        <h3>Detailed Stats</h3>
+        <p>Check attack, HP, Noble Phantasm details and other important stats.</p>
+    </div>
+    <div class="feature">
+        <h3>Easy Management</h3>
+        <p>Add, edit, or remove servant information with our intuitive interface.</p>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}All Servants{% endblock %}
+
+{% block content %}
+<h2>All Servants</h2>
+
+<div class="servant-list">
+    {% for servant in servants %}
+    <div class="servant-card">
+        {% if servant['image_url'] %}
+        <img src="{{ servant['image_url'] }}" alt="{{ servant['name'] }}" class="servant-image">
+        {% endif %}
+        <div class="servant-info">
+            <h3>{{ servant['name'] }}</h3>
+            <p><strong>Class:</strong> {{ servant['class'] }}</p>
+            <p><strong>Rarity:</strong> {{ '★' * servant['rarity'] }}</p>
+            <div class="servant-actions">
+                <a href="{{ url_for('servant_detail', id=servant['id']) }}" class="button">Details</a>
+                <a href="{{ url_for('edit_servant', id=servant['id']) }}" class="button">Edit</a>
+                <a href="{{ url_for('delete_servant', id=servant['id']) }}" class="button danger" onclick="return confirm('Are you sure you want to delete this servant?')">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<a href="{{ url_for('add_servant') }}" class="button">Add New Servant</a>
+{% endblock %}

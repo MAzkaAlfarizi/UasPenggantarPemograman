@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}FGO Story Arcs{% endblock %}
+
+{% block content %}
+<section class="story-header">
+    <h1>Fate/Grand Order Story Arcs</h1>
+    <p class="subtitle">Alur cerita Fate/Grand Order sejauh ini</p>
+</section>
+
+<section class="story-arcs">
+    {% for arc in story_arcs %}
+    <div class="arc-card">
+        <div class="arc-header">
+            <h2>{{ arc.title }}</h2>
+            <span class="arc-year">{{ arc.year }}</span>
+        </div>
+        
+        <div class="arc-content">
+            <div class="arc-summary">
+                <h3>Summary</h3>
+                <p>{{ arc.summary }}</p>
+            </div>
+            
+            <div class="arc-chapters">
+                <h3>Chapters</h3>
+                <ol class="chapter-list">
+                    {% for chapter in arc.chapters %}
+                    <li>{{ chapter }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+<section class="story-timeline">
+    <h2>Story Timeline</h2>
+    <div class="timeline-container">
+        {% for arc in story_arcs %}
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <h3>{{ arc.title }}</h3>
+                <span class="timeline-year">{{ arc.year }}</span>
+                <p>{{ arc.summary }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

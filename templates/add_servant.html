@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Add New Servant{% endblock %}
+
+{% block content %}
+<h2>Add New Servant</h2>
+
+<form method="POST" class="servant-form" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="name">Servant Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="class">Class:</label>
+        <select id="class" name="class" required>
+            <option value="Saber">Saber</option>
+            <option value="Archer">Archer</option>
+            <option value="Lancer">Lancer</option>
+            <option value="Rider">Rider</option>
+            <option value="Caster">Caster</option>
+            <option value="Assassin">Assassin</option>
+            <option value="Berserker">Berserker</option>
+            <option value="Ruler">Ruler</option>
+            <option value="Avenger">Avenger</option>
+            <option value="Alter Ego">Alter Ego</option>
+            <option value="Moon Cancer">Moon Cancer</option>
+            <option value="Foreigner">Foreigner</option>
+            <option value="Pretender">Pretender</option>
+            <option value="Beast">Beast</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="rarity">Rarity (1-5):</label>
+        <input type="number" id="rarity" name="rarity" min="1" max="5" required>
+    </div>
+
+    <div class="form-group">
+        <label for="attack">Attack:</label>
+        <input type="number" id="attack" name="attack" required>
+    </div>
+
+    <div class="form-group">
+        <label for="hp">HP:</label>
+        <input type="number" id="hp" name="hp" required>
+    </div>
+
+    <div class="form-group">
+        <label for="np_name">Noble Phantasm Name:</label>
+        <input type="text" id="np_name" name="np_name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="np_effect">Noble Phantasm Effect:</label>
+        <textarea id="np_effect" name="np_effect" rows="4" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="image">Servant Image:</label>
+        <input type="file" id="image" name="image" accept="image/*">
+        <small class="form-text">Max 2MB (JPEG, PNG, GIF)</small>
+    </div>
+
+    <button type="submit" class="button">Add Servant</button>
+    <a href="{{ url_for('servants') }}" class="button secondary">Cancel</a>
+</form>
+{% endblock %}
